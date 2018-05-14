@@ -230,7 +230,8 @@
     },
     {
       "type": "detailed_актуальные_дефекты_для_версии",
-      "query": "project = '%Project%' AND (issuetype in (Bug) OR (issuetype in (Task) AND component in (Bug_Task))) AND status not in (Closed, Закрыт, Отменен) AND fixversion = '%Version%' order by priority DESC, affectedVersion DESC"
+      "query": "project = '%Project%' AND (issuetype in (Bug) OR (issuetype in (Task) AND component in (Bug_Task))) AND status not in (Closed, Закрыт, Отменен) AND fixversion = '%Version%' order by priority DESC, affectedVersion DESC",
+      "fields": "id,key,summary,priority,status,customfield_10131,versions,customfield_16424,components"
     },
     {
       "type": "detailed_список_доработок",

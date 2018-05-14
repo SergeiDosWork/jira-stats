@@ -105,3 +105,7 @@ table.table-data th {
 .column-quality {
   min-width: 240px;
 }
+
+.icon16 {
+  max-width: 16px;
+}

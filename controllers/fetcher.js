@@ -126,7 +126,7 @@ module.exports.getData = function (options, res, renderCallback) {
                     outerEachCallback();
                 });
             });
-        } else if (item.type.substring(0, 6) === 'detail') {
+        } else if (item.type.startsWith('detail')) {
             q.fields = item.fields || 'id,project,key,summary,priority,status,customfield_10131,versions,customfield_16424';
             if (item.limit) {
                 q.maxResults = item.limit;

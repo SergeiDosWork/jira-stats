@@ -30,7 +30,7 @@ router.get('/data', function(req, res) {
 router.post('/', function(req, res, next) {
     result.input = req.body;
     result.input.testCoverage = getInitialTestCoverage(req);
-    result.input.patches = getLinksForTasks(getStringArrayFromText(req.body.patches));
+    result.input.patches = getLinksForTasks(getStringArrayFromText(req.body.patches),req.body.projectName);
     result.input.dependencies = getStringArrayFromText(req.body.dependencies);
     let dateArr = req.body.dateTestEnd.split('-');
     result.input.dateTestEnd = dateArr[2] + '.' + dateArr[1] + '.' + dateArr[0];
@@ -61,11 +61,13 @@ function getInitialTestCoverage(request) {
     return request.body.testCoverage ? getStringArrayFromText(request.body.testCoverage) : "";
 }
 
-function getLinksForTasks(taskArray) {
+function getLinksForTasks(taskArray, project) {
     return taskArray.map(function (item) {
         let returnString = item.trim();
-        if (!returnString.startsWith("http")) {
-            returnString = fetcher.getHost()+'browse/'+returnString;
+        if (returnString.includes(project)) {
+            if (!returnString.startsWith("http")) {
+                returnString = fetcher.getHost() + 'browse/' + returnString;
+            }
         }
         return returnString;
     })
@@ -133,7 +135,9 @@ function getNeedToFix(incomingData) {
             key: issue.key,
             url: incomingData.host + '/browse/' + issue.key,
             subject: issue.fields.summary,
-            component: issue.fields.component,
+            component: issue.fields.components.map(function (item) {
+                return item.name;
+            }).join(', '),
             priority: {
                 iconUrl: issue.fields.priority.iconUrl,
                 name: issue.fields.priority.name

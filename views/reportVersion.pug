@@ -179,10 +179,10 @@ block content
                       tr
                         td.centered-text
                           a(href=issue.url)= issue.key
-                        td= issue.component
                         td= issue.subject
+                        td= issue.component
                         td
-                          img(src=issue.priority.iconUrl)
+                          img.icon16(src=issue.priority.iconUrl)
                           | &nbsp;#{issue.priority.name}
                         td
                           each version in issue.affectedVersions
