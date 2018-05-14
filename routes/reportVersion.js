@@ -264,14 +264,14 @@ function getQuality(defects, areInduced) {
             spanStyle: 'quality-low',
             description: blockerDescription
         };
-    } else if (defects.critical > 2) {
+    } else if (defects.critical > 10) {
         return {
             level: 2,
             text: 'НИЖЕ СРЕДНЕГО',
             spanStyle: 'quality-low',
             description: criticalDescription
         };
-    } else if (defects.critical <= 2 && defects.critical > 0) {
+    } else if (defects.critical <= 10 && defects.critical > 2) {
         return {
             level: 3,
             text: 'СРЕДНЕЕ',
