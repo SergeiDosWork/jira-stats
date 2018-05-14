@@ -30,7 +30,7 @@ router.get('/data', function(req, res) {
 router.post('/', function(req, res, next) {
     result.input = req.body;
     result.input.testCoverage = getInitialTestCoverage(req);
-    result.input.patches = getStringArrayFromText(req.body.patches);
+    result.input.patches = getLinksForTasks(getStringArrayFromText(req.body.patches));
     result.input.dependencies = getStringArrayFromText(req.body.dependencies);
     let dateArr = req.body.dateTestEnd.split('-');
     result.input.dateTestEnd = dateArr[2] + '.' + dateArr[1] + '.' + dateArr[0];
@@ -61,7 +61,15 @@ function getInitialTestCoverage(request) {
     return request.body.testCoverage ? getStringArrayFromText(request.body.testCoverage) : "";
 }
 
-
+function getLinksForTasks(taskArray) {
+    return taskArray.map(function (item) {
+        let returnString = item.trim();
+        if (!returnString.startsWith("http")) {
+            returnString = fetcher.getHost()+'browse/'+returnString;
+        }
+        return returnString;
+    })
+}
 
 function getStringArrayFromText(multiLineText) {
     return multiLineText.split('\n').map(function(item) {

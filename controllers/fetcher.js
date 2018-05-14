@@ -46,6 +46,10 @@ module.exports.getStatus = function() {
     }
 };
 
+module.exports.getHost = function () {
+    return host;
+}
+
 module.exports.getData = function (options, res, renderCallback) {
     let queries = conf.get('queries' + options.dataType[0]);
     totalQueries += queries.length;
