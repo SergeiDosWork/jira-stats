@@ -169,6 +169,7 @@ block content
                     tr
                       th.table-highlighted.column-key Код
                       th.table-highlighted Тема
+                      th.table-highlighted Компонент
                       th.table-highlighted.column-priority Приоритет
                       th.table-highlighted Проявляется в версиях
                       th.table-highlighted.column-status Статус
@@ -178,6 +179,7 @@ block content
                       tr
                         td.centered-text
                           a(href=issue.url)= issue.key
+                        td= issue.component
                         td= issue.subject
                         td
                           img(src=issue.priority.iconUrl)

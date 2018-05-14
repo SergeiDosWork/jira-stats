@@ -125,6 +125,7 @@ function getNeedToFix(incomingData) {
             key: issue.key,
             url: incomingData.host + '/browse/' + issue.key,
             subject: issue.fields.summary,
+            component: issue.fields.component,
             priority: {
                 iconUrl: issue.fields.priority.iconUrl,
                 name: issue.fields.priority.name
